@@ -68,6 +68,8 @@ abstract contract BridgeFungibleUpgradeable is Initializable, ContextUpgradeable
         bytes calldata /*sender*/,
         bytes calldata payload
     ) internal virtual override {
+        // NOTE: Gateway is validated by {_isAuthorizedGateway} (implemented in {CrosschainLinked}). No need to check here.
+
         // split payload
         (bytes memory from, bytes memory toBinary, uint256 amount) = abi.decode(payload, (bytes, bytes, uint256));
         address to = address(bytes20(toBinary));

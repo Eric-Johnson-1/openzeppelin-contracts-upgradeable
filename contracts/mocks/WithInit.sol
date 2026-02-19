@@ -65,6 +65,13 @@ contract AccountERC7579HookedUpgradeableWithInit is AccountERC7579HookedUpgradea
         __AccountERC7579Hooked_init();
     }
 }
+import "../crosschain/bridges/BridgeERC1155Upgradeable.sol";
+
+contract BridgeERC1155UpgradeableWithInit is BridgeERC1155Upgradeable {
+    constructor(IERC1155 token_) payable initializer {
+        __BridgeERC1155_init(token_);
+    }
+}
 import "../crosschain/bridges/BridgeERC20Upgradeable.sol";
 
 contract BridgeERC20UpgradeableWithInit is BridgeERC20Upgradeable {
@@ -1226,6 +1233,13 @@ import "../token/ERC1155/extensions/ERC1155BurnableUpgradeable.sol";
 contract ERC1155BurnableUpgradeableWithInit is ERC1155BurnableUpgradeable {
     constructor() payable initializer {
         __ERC1155Burnable_init();
+    }
+}
+import "../token/ERC1155/extensions/ERC1155CrosschainUpgradeable.sol";
+
+contract ERC1155CrosschainUpgradeableWithInit is ERC1155CrosschainUpgradeable {
+    constructor() payable initializer {
+        __ERC1155Crosschain_init();
     }
 }
 import "../token/ERC1155/extensions/ERC1155PausableUpgradeable.sol";
