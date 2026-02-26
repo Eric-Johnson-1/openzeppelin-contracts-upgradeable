@@ -79,6 +79,13 @@ contract BridgeERC20UpgradeableWithInit is BridgeERC20Upgradeable {
         __BridgeERC20_init(token_);
     }
 }
+import "../crosschain/bridges/BridgeERC721Upgradeable.sol";
+
+contract BridgeERC721UpgradeableWithInit is BridgeERC721Upgradeable {
+    constructor(IERC721 token_) payable initializer {
+        __BridgeERC721_init(token_);
+    }
+}
 import "../crosschain/bridges/BridgeERC7802Upgradeable.sol";
 
 contract BridgeERC7802UpgradeableWithInit is BridgeERC7802Upgradeable {
@@ -1394,6 +1401,13 @@ import "../token/ERC721/extensions/ERC721ConsecutiveUpgradeable.sol";
 contract ERC721ConsecutiveUpgradeableWithInit is ERC721ConsecutiveUpgradeable {
     constructor() payable initializer {
         __ERC721Consecutive_init();
+    }
+}
+import "../token/ERC721/extensions/ERC721CrosschainUpgradeable.sol";
+
+contract ERC721CrosschainUpgradeableWithInit is ERC721CrosschainUpgradeable {
+    constructor() payable initializer {
+        __ERC721Crosschain_init();
     }
 }
 import "../token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
