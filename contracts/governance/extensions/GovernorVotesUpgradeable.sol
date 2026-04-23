@@ -7,6 +7,7 @@ import {GovernorUpgradeable} from "../GovernorUpgradeable.sol";
 import {IVotes} from "@openzeppelin/contracts/governance/utils/IVotes.sol";
 import {IERC5805} from "@openzeppelin/contracts/interfaces/IERC5805.sol";
 import {Time} from "@openzeppelin/contracts/utils/types/Time.sol";
+import {ERC6372Utils} from "@openzeppelin/contracts/utils/ERC6372Utils.sol";
 import {Initializable} from "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 /**
@@ -65,7 +66,7 @@ abstract contract GovernorVotesUpgradeable is Initializable, GovernorUpgradeable
         try token().CLOCK_MODE() returns (string memory clockmode) {
             return clockmode;
         } catch {
-            return "mode=blocknumber&from=default";
+            return ERC6372Utils.blockNumberClockMode(clock);
         }
     }
 

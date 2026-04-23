@@ -11,6 +11,7 @@ import {Checkpoints} from "@openzeppelin/contracts/utils/structs/Checkpoints.sol
 import {SafeCast} from "@openzeppelin/contracts/utils/math/SafeCast.sol";
 import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import {Time} from "@openzeppelin/contracts/utils/types/Time.sol";
+import {ERC6372Utils} from "@openzeppelin/contracts/utils/ERC6372Utils.sol";
 import {Initializable} from "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 /**
@@ -56,11 +57,6 @@ abstract contract VotesUpgradeable is Initializable, ContextUpgradeable, EIP712U
     }
 
     /**
-     * @dev The clock was incorrectly modified.
-     */
-    error ERC6372InconsistentClock();
-
-    /**
      * @dev Lookup to future votes is not available.
      */
     error ERC5805FutureLookup(uint256 timepoint, uint48 clock);
@@ -83,11 +79,7 @@ abstract contract VotesUpgradeable is Initializable, ContextUpgradeable, EIP712U
      */
     // solhint-disable-next-line func-name-mixedcase
     function CLOCK_MODE() public view virtual returns (string memory) {
-        // Check that the clock was not modified
-        if (clock() != Time.blockNumber()) {
-            revert ERC6372InconsistentClock();
-        }
-        return "mode=blocknumber&from=default";
+        return ERC6372Utils.blockNumberClockMode(clock);
     }
 
     /**
