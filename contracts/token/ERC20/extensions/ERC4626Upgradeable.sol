@@ -117,7 +117,7 @@ abstract contract ERC4626Upgradeable is Initializable, ERC20Upgradeable, IERC462
 
     function __ERC4626_init_unchained(IERC20 asset_) internal onlyInitializing {
         ERC4626Storage storage $ = _getERC4626Storage();
-        (bool success, uint8 assetDecimals) = SafeERC20.tryGetDecimals(address(asset_));
+        (bool success, uint8 assetDecimals) = SafeERC20.tryGetDecimals(asset_);
         $._underlyingDecimals = success ? assetDecimals : 18;
         $._asset = asset_;
     }

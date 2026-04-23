@@ -63,7 +63,7 @@ abstract contract ERC20WrapperUpgradeable is Initializable, ERC20Upgradeable {
      */
     function decimals() public view virtual override returns (uint8) {
         ERC20WrapperStorage storage $ = _getERC20WrapperStorage();
-        (bool success, uint8 decimals_) = SafeERC20.tryGetDecimals(address($._underlying));
+        (bool success, uint8 decimals_) = SafeERC20.tryGetDecimals($._underlying);
         return uint8(Math.ternary(success, decimals_, super.decimals())); // Safe cast. Both are uint8.
     }
 
